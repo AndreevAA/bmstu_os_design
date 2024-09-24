@@ -5,6 +5,8 @@
 
 #define NUM_THREADS 2
 
+// #define NUM_THREADS 10
+
 int want[NUM_THREADS] = {0, 0}; // Массив флагов для потоков
 int turn; // Переменная, указывающая чей сейчас ход
 
@@ -32,6 +34,7 @@ void *thread_function(void *arg) {
 int main() {
     pthread_t threads[NUM_THREADS];
     int thread_ids[NUM_THREADS] = {0, 1};
+    // int thread_ids[NUM_THREADS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     for (int i = 0; i < NUM_THREADS; ++i) {
         pthread_create(&threads[i], NULL, thread_function, (void *)&thread_ids[i]);

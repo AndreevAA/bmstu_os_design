@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <unistd.h>
 #include <time.h>
+#include <unistd.h>
 
 #define NUM_THREADS 2 // Число потоков
-#define NUM_ITERATIONS 100000000 // Число итераций для каждого потока
+#define NUM_ITERATIONS 1000 // Число итераций для каждого потока
 #define WAIT_TIME 1 // Время ожидания в секундах
 
 int want[NUM_THREADS] = {0, 0}; // Массив флагов для потоков

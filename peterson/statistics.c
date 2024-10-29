@@ -9,7 +9,7 @@
 
 #define NUM_THREADS 2 // Количество потоков
 #define WAIT_TIME 10 // Время ожидания в "операциях"
-#define MAX_TESTS 10 // Максимальное количество тестов
+#define MAX_TESTS 14 // Максимальное количество тестов
 #define MAX_ITERATIONS 2500 // Максимальное количество итераций для теста
 
 int want[NUM_THREADS] = {0, 0}; // Массив флагов для потоков
@@ -44,10 +44,12 @@ void *thread_function(void *arg) {
         // Ожидание, пока не пройдет очередь
         while (want[1 - id] && turn == 1 - id) {
             // Увеличиваем счетчик операций во время ожидания
-            if (id == 0) {
-                __atomic_fetch_add( &operation_cnt_id_zero, 1, __ATOMIC_SEQ_CST );
+            if (id == 1) {
+//                __atomic_fetch_add( &operation_cnt_id_zero, 1, __ATOMIC_SEQ_CST );
+                git ++;
             } else {
-                __atomic_fetch_add( &operation_cnt_id_one, 1, __ATOMIC_SEQ_CST );
+//                __atomic_fetch_add( &operation_cnt_id_one, 1, __ATOMIC_SEQ_CST );
+                operation_cnt_id_zero++;
             }
         }
 
@@ -74,8 +76,8 @@ void *thread_function(void *arg) {
 
 void run_tests_1() {
     FILE *file = fopen("results.txt", "w");
-    int iterations_arr[MAX_TESTS] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
-//    int iterations_arr[MAX_TESTS] = {100, 200, 500, 1000, 2000, 5000, 10000, 20000, 40000, 80000, 160000, 350000, 1000000, 5000000};
+//    int iterations_arr[MAX_TESTS] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+    int iterations_arr[MAX_TESTS] = {100, 200, 500, 1000, 2000, 5000, 10000, 20000, 40000, 80000, 160000, 350000, 1000000, 5000000};
 //    int iterations_arr[MAX_TESTS] = {1000000, 2000000, 3000000, 4000000, 5000000, 6000000, 7000000};
 
     for (int t = 0; t < MAX_TESTS; t++) {
